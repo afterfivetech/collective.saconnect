@@ -26,10 +26,10 @@ class SQLAlchemyConnectionStrings(DictMixin):
         self._dict = annotations.setdefault(ANNKEY, PersistentMapping())
         
     def __len__(self):
-        return len(self.mylist)
+        return len(self._dict)
 
     def __iter__(self):
-        for i in self.mylist:
+        for i in self._dict:
             yield i
     
     def __getitem__(self, key):
