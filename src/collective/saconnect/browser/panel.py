@@ -78,9 +78,8 @@ class SQLAlchemyConnectionsForm(crud.CrudForm):
 
     def get_items(self):
         names = self.storage.keys()
-        names.sort()
         return [(name, ConnectionLine(name, self.storage[name], self))
-                for name in names]
+                for name in sorted(names)]
 
     def add(self, data):
         name = data['connname'].strip()
