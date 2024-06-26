@@ -18,13 +18,20 @@ ANNKEY = 'collective.saconnect.storage'
 
 @implementer(ISQLAlchemyConnectionStrings)
 @adapter(IAnnotatable)
-class SQLAlchemyConnectionStrings(UserDict):
+class SQLAlchemyConnectionStrings(DictMixin):
 
     def __init__(self, context):
         self.context = context
         annotations = IAnnotations(self.context)
         self._dict = annotations.setdefault(ANNKEY, PersistentMapping())
+        
+    def __len__(self):
+        return len(self.mylist)
 
+    def __iter__(self):
+        for i in self.mylist:
+            yield i
+    
     def __getitem__(self, key):
         return self._dict[key]
 
